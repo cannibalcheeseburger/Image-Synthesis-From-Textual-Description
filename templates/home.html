@@ -1,0 +1,9 @@
+{% extends "layout.html" %} {% load static %} {% block content %}
+<div class="text-center">
+<form action="{% url 'home' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+</div>
+{% endblock %}
