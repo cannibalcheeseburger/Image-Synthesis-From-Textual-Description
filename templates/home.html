@@ -1,9 +1,42 @@
 {% extends "layout.html" %} {% load static %} {% block content %}
-<div class="text-center">
-<form action="{% url 'home' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
-</div>
-{% endblock %}
+
+    <div
+      class="
+        d-flex
+        justify-content-center
+        align-items-center
+        my-5
+        container
+        flex-column
+      "
+    >
+      <div class="card mb-3" style="min-width: 50vw">
+        <div class="card-body">
+          <h1 class="card-title text-center text-warning">Image Generation</h1>
+          <h5 class="card-title text-center text-warning">
+            Using Textual Description
+          </h5>
+        </div>
+      </div>
+      <div class="card text-white bg-secondary mb-3" style="min-width: 50vw">
+        <h2 class="card-header text-center">Generate Image</h2>
+        <div class="card-body">
+          <form action="{% url 'home' %}" method="post">
+            <div class="row mb-3">
+              <div class="col-md-5 d-flex align-items-center">
+                <h5 class="d-flex align-items-center">Enter Description</h5>
+              </div>
+              <div class="col-md-7" style="display:inline">
+                {% csrf_token %}
+                {{ form.Text }}
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-warning">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}
