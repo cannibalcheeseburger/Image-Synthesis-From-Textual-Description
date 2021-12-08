@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .forms import Textform
+from .util import pred
 
 def home(request):
     context ={}
@@ -8,8 +9,8 @@ def home(request):
         if form.is_valid():
             text = request.POST['Text']
             context['text'] = text
-            # synthesize image
-            context['image'] = 'test.jfif'
+            pred([text])
+            context['image'] = 'test.png'
             return render(request,'result.html',context=context)
     else:
         form = Textform()
