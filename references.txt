@@ -1,0 +1,3 @@
+https://www.kaggle.com/msripooja/text2image-gan/notebook
+https://github.com/Nikunj-Gupta/Text-to-Image-Synthesis/blob/master/Report.pdf
+https://www.kaggle.com/msripooja/text2image-gan/data
