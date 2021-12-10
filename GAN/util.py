@@ -5,7 +5,7 @@ import re
 from keras.preprocessing.image import array_to_img
 from numpy import asarray
 import numpy as np
-
+from PIL import Image
 import matplotlib.pyplot as pyplot
 from keras.preprocessing.image import array_to_img
 from numpy import linspace
@@ -54,17 +54,22 @@ def generate_random_word_vectors_from_dataset(n_samples,captions, create_new_cap
     return  np.asarray(captions)[ix]
 
 def generate_images(model, test_input):
-
   predictions = model(test_input, training=False)
-
+  images = []
   print(predictions.shape)
+  """
   pyplot.figure(figsize=[15, 15])
   for i in range(predictions.shape[0]):
       pyplot.subplot(1, 9, i+1)
       pyplot.imshow(array_to_img(predictions.numpy()[i]))
       pyplot.axis('off')
-  pyplot.savefig('./media/images/test.png')
-
+  pyplot.savefig('./media/images/test.png')"""
+  for i in range(predictions.shape[0]):
+      im = array_to_img(predictions.numpy()[i])
+      name = str(i)+'.png'
+      im.save('./media/images/'+name)
+      images.append(name)
+  return images
 # Credit to: https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network/
 def interpolate_points(p1, p2, n_steps=9):
 	ratios = linspace(0, 1, num=n_steps)
@@ -124,12 +129,14 @@ def create_feature_vectors_for_single_comment(word2vec_model, cleaned_comments):
     return image_list, np.array(vectorized_list)
 
 
-def pred(sentence):
+def pred(sentence,samples):
     cleaned_captions = clean_and_tokenize_comments_for_image(sentence)
 
     i, captions = create_feature_vectors_for_single_comment(model, cleaned_captions)
 
-    generate_images(gen_model,generate_latent_points(100,9,captions))
+    images = generate_images(gen_model,generate_latent_points(100,samples,captions))
+
+    return images
 
 if __name__ =='__main__':
     sentence = ["white feathers bird"]

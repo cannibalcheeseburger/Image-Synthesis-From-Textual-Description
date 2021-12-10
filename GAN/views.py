@@ -9,8 +9,9 @@ def home(request):
         if form.is_valid():
             text = request.POST['Text']
             context['text'] = text
-            pred([text])
-            context['image'] = 'test.png'
+            images = pred([text],int(request.POST['samples']))
+            print(images)
+            context['images'] = images
             return render(request,'result.html',context=context)
     else:
         form = Textform()
