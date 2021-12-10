@@ -12,6 +12,7 @@ from numpy import linspace
 import nltk
 nltk.download('punkt')
 from nltk.tokenize import word_tokenize
+from numpy.random import random
 
 from numpy.random import randint
 
